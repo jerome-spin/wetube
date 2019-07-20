@@ -11,7 +11,7 @@ export const logout = (req, res) =>
     pageTitle: 'Logout',
   });
 export const userDetail = (req, res) =>
-  res.render('userDeatil', {
+  res.render('userDetail', {
     pageTitle: 'User Detail',
   });
 export const editProfile = (req, res) =>

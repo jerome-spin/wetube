@@ -43,7 +43,7 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id);
     res.render('videoDetail', {
-      pageTitle: 'Video Detail',
+      pageTitle: video.title,
       video,
     });
   } catch (error) {
@@ -82,7 +82,16 @@ export const postEditVideo = async (req, res) => {
   }
 };
 
-export const deleteVideo = (req, res) =>
-  res.render('deleteVideox', {
-    deleteVideo: 'Delete Video',
-  });
+export const deleteVideo = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    await Video.findOneAndRemove({ _id: id });
+  } catch (error) {
+    console.log('TCL: error', error);
+  }
+
+  res.redirect(routes.home);
+};

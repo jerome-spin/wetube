@@ -33,3 +33,25 @@ $ ps -ef | grep mongo
 # Check mongoDB logs (in realtime, add -f option)
 $ docker logs wetube-db
 ```
+
+## How to use MongoDB in terminal
+
+```bash
+# To Connect Mongodb Container
+$ docker exec -it wetube-db bash
+
+# To Run MongoDB
+$ mongo
+
+# To Check Databases
+$ show databases
+
+# To Select we-tube Database
+$ use we-tube
+
+# To Check Collections
+$ show collections
+
+# To Find every User in users Collection
+$ db.users.find({})
+```

@@ -1,3 +1,4 @@
+import passport from 'passport';
 import routes from '../routes';
 import User from '../models/User';
 
@@ -8,7 +9,7 @@ export const getJoin = (req, res) => {
   });
 };
 
-export const postJoin = async (req, res) => {
+export const postJoin = async (req, res, next) => {
   const {
     body: { name, email, password, password2 },
   } = req;
@@ -23,11 +24,10 @@ export const postJoin = async (req, res) => {
         email,
       });
       await User.register(user, password);
+      next();
     } catch (error) {
       console.log('TCL: postJoin -> error', error);
     }
-    // TODO: Register User, Log user in
-    res.redirect(routes.home);
   }
 };
 
@@ -37,9 +37,10 @@ export const getLogin = (req, res) =>
     pageTitle: 'Log In',
   });
 
-export const postLogin = (req, res) => {
-  res.redirect(routes.home);
-};
+export const postLogin = passport.authenticate('local', {
+  failureRedirect: routes.login,
+  successRedirect: routes.home,
+});
 
 // Logout
 export const logout = (req, res) => {

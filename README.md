@@ -36,6 +36,8 @@ $ docker logs wetube-db
 
 ## How to use MongoDB in terminal
 
+[MongoDB Document](https://docs.mongodb.com/manual/core/document)
+
 ```bash
 # To Connect Mongodb Container
 $ docker exec -it wetube-db bash
@@ -54,4 +56,13 @@ $ show collections
 
 # To Find every User in users Collection
 $ db.users.find({})
+
+# To Delete every User in users Collection
+$ db.users.remove({})
+
+# To Remove a single document from a Collection
+$ db.users.deleteOne({})
+
+# To Remove all documents that match the filter from a collection
+$ db.users.deleteMany({})
 ```

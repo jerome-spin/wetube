@@ -7,8 +7,15 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = 'WeTube';
   res.locals.routes = routes;
   res.locals.user = req.user || null;
-  console.log(req.user);
   next();
+};
+
+export const onlyPublic = (req, res, next) => {
+  req.user ? res.redirect(routes.home) : next();
+};
+
+export const onlyPrivate = (req, res, next) => {
+  req.user ? next() : res.redirect(routes.home);
 };
 
 export const uploadVideo = multerVideo.single('videoFile');

@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
+import mongoose from 'mongoose';
 
 import routes from './routes';
 import globalRouter from './routers/globalRouter';
@@ -15,6 +17,7 @@ import { localsMiddleware } from './middlewares';
 import './pasaport';
 
 const app = express();
+const CookieStore = MongoStore(session);
 
 // The order matters
 app.use(helmet());
@@ -30,6 +33,7 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection }),
   })
 );
 app.use(passport.initialize());

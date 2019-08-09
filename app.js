@@ -14,7 +14,7 @@ import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
 import { localsMiddleware } from './middlewares';
 
-import './pasaport';
+import './passport';
 
 const app = express();
 const CookieStore = MongoStore(session);

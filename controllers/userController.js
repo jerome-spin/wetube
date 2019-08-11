@@ -70,7 +70,6 @@ export const githubLoginCallback = async (
     });
     return cb(null, newUser);
   } catch (error) {
-    console.log('TCL: error', error);
     return cb(error);
   }
 };
@@ -107,7 +106,7 @@ export const facebookLoginCallback = async (
     });
     return cb(null, newUser);
   } catch (error) {
-    return cb(err);
+    return cb(error);
   }
 };
 

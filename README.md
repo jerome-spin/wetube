@@ -34,6 +34,13 @@ $ ps -ef | grep mongo
 $ docker logs wetube-db
 ```
 
+## Run MongoDB using docker-compose
+
+```bash
+# Run docker-compose in background(-d)
+$ docker-copmose up -d
+```
+
 ## How to use MongoDB in terminal
 
 [MongoDB Document](https://docs.mongodb.com/manual/core/document)

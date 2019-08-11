@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  wetube-db:
+    image: 'mongo:latest'
+    container_name: 'wetube-db'
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./wetube_db:/data/db
+volumes:
+  wetube_db:

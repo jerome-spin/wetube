@@ -145,10 +145,30 @@ export const userDetail = async (req, res) => {
 };
 
 // Edit Profile
-export const editProfile = (req, res) =>
+export const getEditProfile = (req, res) =>
   res.render('editProfile', {
     pageTitle: 'Edit Profile',
   });
+
+export const postEditProfile = async (req, res) => {
+  const {
+    user: { id, avatarUrl },
+    body: { name, email },
+    file,
+  } = req;
+
+  try {
+    await User.findByIdAndUpdate(id, {
+      name,
+      email,
+      avatarUrl: file ? file.path : avatarUrl,
+    });
+    res.redirect(routes.me);
+  } catch (error) {
+    console.log('TCL: postEditProfile -> error', error);
+    res.render('editProfile', { pageTitle: 'Edit Profile' });
+  }
+};
 
 // Change Password
 export const changePassword = (req, res) =>

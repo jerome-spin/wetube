@@ -133,13 +133,9 @@ export const userDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const user = await User.findById(id);
-    res.render('userDetail', {
-      pageTitle: 'User Detail',
-      user,
-    });
+    const user = await User.findById(id).populate('videos');
+    res.render('userDetail', { pageTitle: 'User Detail', user });
   } catch (error) {
-    console.log('TCL: userDetail -> error', error);
     res.redirect(routes.home);
   }
 };
@@ -176,7 +172,7 @@ export const getChangePassword = (req, res) =>
     pageTitle: 'Change Password',
   });
 
-export const postChangepassword = async (req, res) => {
+export const postChangePassword = async (req, res) => {
   const {
     body: { oldPassword, newPassword, newPassword1 },
   } = req;
@@ -184,14 +180,15 @@ export const postChangepassword = async (req, res) => {
   try {
     if (newPassword !== newPassword1) {
       res.status(400);
-      res.redirect(routes.changePassword);
+      res.redirect(`/users/${routes.changePassword}`);
       return;
     } else {
       await req.user.changePassword(oldPassword, newPassword);
-      res.redirect(`/users/${routes.changePassword}`);
+      res.redirect(routes.me);
     }
   } catch (error) {
     console.log('TCL: postChangepassword -> error', error);
+    res.status(400);
     res.redirect(`/users/${routes.changePassword}`);
   }
 };

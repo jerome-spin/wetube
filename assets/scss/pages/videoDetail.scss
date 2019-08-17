@@ -10,6 +10,11 @@
       width: 100px;
       margin-bottom: 25px;
     }
+    .video__author {
+      a {
+        color: #3498db;
+      }
+    }
     .video__title,
     .video__views,
     .video__description {
@@ -21,7 +26,7 @@
       font-weight: 300;
     }
     .video__views {
-      font-size: 16px;
+      font-size: 14px;
     }
     .video__description {
       font-size: 16px;
